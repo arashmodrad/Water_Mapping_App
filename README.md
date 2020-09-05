@@ -4,7 +4,8 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 
 ##### Table of Contents
 
-- [Project Goals](#project-goals)
+- [Introduction](#The Need for Automation of Inland Water Body Mapping)
+- [Example](#Example)
 - [Installation](#installation)
   * [Dependencies](#dependencies)
   * [Quick Install](#quick-install)
@@ -37,26 +38,31 @@ Inland water bodies play a significant role in hydrological systems, and are ess
 
 ### Example
 
-A demonstration is shown in the blow figure, where the image to the left is the true color composite of three red, green and blue bands from Landsat 8 and the image to the right is the extracted water body that is comprised of water (cyan areas) and non-water (black areas) features. 
+A demonstration is shown in the figure below, where the image to the left is the Pyramid Lake (located in Nevada, United States) true color composite of three red, green and blue bands from Landsat 8 and the image to the right is the extracted water body that is comprised of water (cyan areas) and non-water (black areas) features.
 
-![Example](assets/Images/Untitled-1.gif)
+![Example](assests/Images/Untitled-1.gif)
+
+## App Options
 
 ```markdown
-Syntax highlighted code block
+The App is desigend in way that users can have the following options:
 
-# Header 1
-## Header 2
-### Header 3
+1. Users can select feom range of Spectral Water Indices including
+-ANDWI
+-MNDWI
+-NDWI
+-AWEIsh
+-AWEInsh
+-WI
+2. Select their study area using a polygon drawing feature 
+3. Chose from the two options of 
+-Hard thersholding (e.g., zero defining the threshold seperating water and non-water)
+-Dynamic thersholding (e.g., Otsu method for finding optimum threshold seperating water and non-water)
+4. Select an exporting method
+-Google Drive
+-Google Assets
+5. Select an ID associated with the date of intrest to export a shapefile of water body
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
