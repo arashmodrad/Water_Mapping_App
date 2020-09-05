@@ -9,29 +9,12 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 - [App Options](#app-options)
 - [How To?](#how-to)
   * [Tutorial](#tutorial)
-  * [Quick Install](#quick-install)
-    + [Linux](#linux)
-    + [Mac](#mac)
-    + [Windows](#windows)
-  * [Developer Install](#developer-install)
-    + [Docker](#docker)
-    + [Tomcat War](#tomcat-war)
-    + [Cloud VM Template](#cloud-vm-template)
-  * [Build from source](#build-from-source)
-- [Demo](#demo)
-- [Usage](#usage)
-  * [Add A Server](#add-a-server)
-  * [Create A Process](#create-a-process)
-  * [Create A Workflow](#create-a-workflow)
-  * [Run Workflow](#run-workflow)
-  * [Browse Provenance](#browse-provenance)
-  * [Retrieve and Display Results](#retrieve-and-display-results)
-  * [I/O workflows](#i-o-workflows)
+  * [GEE Code Edithor](#gee-code-edithor)
+  * [Cloning](#Cloning)
 - [Documentation](#documentation)
-- [Dependencies](#dependencies)
+- [Acknowledgments](#acknowledgments)
+- [Authors](#authors)
 - [License](#license)
-- [Author](#author)
-
 
 ## The Need for Automation of Inland Water Body Mapping
 
@@ -83,14 +66,33 @@ The App is desigend in way that users can have the following options:
 
 YouTube tutorial video:
 
-[YouTube](https://youtu.be/7RovfG7IeM8).
+Here is a YouTube link to the vidoe [YouTube](https://youtu.be/7RovfG7IeM8).
 
 ![Example2](assests/Images/sshot-1.gif)
 
-### Jekyll Themes
+### GEE Code Edithor
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/arashmodrad/Water_Mapping_App/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Google Earth Engine Link to Share the Project: 
 
-### Support or Contact
+Here is a GEE link to the project [GEE](https://code.earthengine.google.com/?accept_repo=users/Water_Delineation/water).
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+![Example3](assests/Images/APP.gif)
+
+### Cloning
+
+```shell
+git clone https://earthengine.googlesource.com/users/Water_Delineation/water
+```
+# Acknowledgments
+
+![Example4](assests/Images/CUAHSI-Logo-with-URL---Transparent_(RESIZED).gif)
+
+This material is based on grant provided by CUAHSI with support from the National Science Foundation (NSF) Cooperative Agreement No. EAR-1849458.
+
+# Authors
+
+[developer list](authors.md)
+
+# License
+
+MIT
