@@ -47,18 +47,18 @@ A demonstration is shown in the figure below, where the image to the left is the
 
 The App is desigend in way that users can have the following options:
 
-1. Users can select feom range of Spectral Water Indices including
--ANDWI
--MNDWI
--NDWI
+1. Users can select feom range of Spectral Water Indices including;
+-ANDWI;
+-MNDWI;
+-NDWI;
 -AWEIsh
 -AWEInsh
 -WI
-2. Select their study area using a polygon drawing feature 
-3. Chose from the two options of 
+2. Select their study area using a polygon drawing feature;
+3. Chose from the two options of;
 -Hard thersholding (e.g., zero defining the threshold seperating water and non-water)
 -Dynamic thersholding (e.g., Otsu method for finding optimum threshold seperating water and non-water)
-4. Select an exporting method
+4. Select an exporting method;
 -Google Drive
 -Google Assets
 5. Select an ID associated with the date of intrest to export a shapefile of water body
