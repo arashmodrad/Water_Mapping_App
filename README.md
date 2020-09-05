@@ -32,31 +32,31 @@ The App is desigend in way that users can have the following options:
 
 1. #### Users can select feom range of Spectral Water Indices including
 
--ANDWI
+- ANDWI
 
--MNDWI
+- MNDWI
 
--NDWI
+- NDWI
 
--AWEIsh
+- AWEIsh
 
--AWEInsh
+- AWEInsh
 
--WI
+- WI
 
 2. #### Select their study area using a polygon drawing feature
 
 3. #### Chose from the two options of
 
--Hard thersholding (e.g., zero defining the threshold seperating water and non-water)
+- Hard thersholding (e.g., zero defining the threshold seperating water and non-water)
 
--Dynamic thersholding (e.g., Otsu method for finding optimum threshold seperating water and non-water)
+- Dynamic thersholding (e.g., Otsu method for finding optimum threshold seperating water and non-water)
 
 4. #### Select an exporting method
 
--Google Drive
+- Google Drive
 
--Google Assets
+- Google Assets
 
 5. #### Select an ID associated with the date of intrest to export a shapefile of water body
 
