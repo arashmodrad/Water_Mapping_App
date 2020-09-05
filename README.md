@@ -7,8 +7,8 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 - [Introduction](#the-need-for-automation-of-inland-water-body-mapping)
   * [Example](#example)
 - [App Options](#app-options)
-- [Installation](#installation)
-  * [Dependencies](#dependencies)
+- [How To?](#how-to)
+  * [Tutorial](#tutorial)
   * [Quick Install](#quick-install)
     + [Linux](#linux)
     + [Mac](#mac)
@@ -47,13 +47,13 @@ A demonstration is shown in the figure below, where the image to the left is the
 
 The App is desigend in way that users can have the following options:
 
-1. #### Users can select feom range of Spectral Water Indices including;
+1. #### Users can select feom range of Spectral Water Indices including
 
--ANDWI;
+-ANDWI
 
--MNDWI;
+-MNDWI
 
--NDWI;
+-NDWI
 
 -AWEIsh
 
@@ -61,18 +61,31 @@ The App is desigend in way that users can have the following options:
 
 -WI
 
-2. Select their study area using a polygon drawing feature;
-3. Chose from the two options of;
+2. #### Select their study area using a polygon drawing feature
+
+3. #### Chose from the two options of
+
 -Hard thersholding (e.g., zero defining the threshold seperating water and non-water)
+
 -Dynamic thersholding (e.g., Otsu method for finding optimum threshold seperating water and non-water)
-4. Select an exporting method;
+
+4. #### Select an exporting method
+
 -Google Drive
+
 -Google Assets
-5. Select an ID associated with the date of intrest to export a shapefile of water body
 
+5. #### Select an ID associated with the date of intrest to export a shapefile of water body
 
+## How To?
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Tutorial
+
+YouTube tutorial video:
+
+[YouTube](https://youtu.be/7RovfG7IeM8).
+
+![Example2](assests/Images/sshot-1.gif)
 
 ### Jekyll Themes
 
