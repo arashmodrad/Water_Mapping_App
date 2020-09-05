@@ -4,8 +4,9 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 
 ##### Table of Contents
 
-- [Introduction](#The Need for Automation of Inland Water Body Mapping)
-- [Example](#Example)
+- [Introduction](#the-need-for-automation-of-inland-water-body-mapping)
+  * [Example](#example)
+- [App Options](#app-options)
 - [Installation](#installation)
   * [Dependencies](#dependencies)
   * [Quick Install](#quick-install)
@@ -44,7 +45,6 @@ A demonstration is shown in the figure below, where the image to the left is the
 
 ## App Options
 
-```markdown
 The App is desigend in way that users can have the following options:
 
 1. Users can select feom range of Spectral Water Indices including
@@ -63,7 +63,7 @@ The App is desigend in way that users can have the following options:
 -Google Assets
 5. Select an ID associated with the date of intrest to export a shapefile of water body
 
-```
+
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
