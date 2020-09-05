@@ -47,13 +47,20 @@ A demonstration is shown in the figure below, where the image to the left is the
 
 The App is desigend in way that users can have the following options:
 
-1. Users can select feom range of Spectral Water Indices including;
+1. #### Users can select feom range of Spectral Water Indices including;
+
 -ANDWI;
+
 -MNDWI;
+
 -NDWI;
+
 -AWEIsh
+
 -AWEInsh
+
 -WI
+
 2. Select their study area using a polygon drawing feature;
 3. Chose from the two options of;
 -Hard thersholding (e.g., zero defining the threshold seperating water and non-water)
