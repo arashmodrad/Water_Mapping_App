@@ -4,9 +4,15 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## The Need for Automation of Inland Water Body Mapping
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Inland water bodies play a significant role in hydrological systems, and are essential resources for many human needs such as irrigating croplands and survival of different ecosystems. Both climate change and human interventions are causing large changes in the water bodies on a global scale and such changes will affect agriculture, industry, ecology, and population. The need to map surface water bodies becomes more revealing in water resources management of basins in remote locations with no gauging instruments. Recent advances in satellite‐based optical remote sensors have provided a routine approach for monitoring land surface water bodies in real-time. 
+
+### Example
+
+A demonstration is shown in the blow figure, where the image to the left is the true color composite of three red, green and blue bands from Landsat 8 and the image to the right is the extracted water body that is comprised of water (cyan areas) and non-water (black areas) features. 
+
+![Example](assets/Images/Untitled-1.tif)
 
 ```markdown
 Syntax highlighted code block
