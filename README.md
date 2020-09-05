@@ -2,7 +2,34 @@
 
 A [Google Earth Engine](https://code.earthengine.google.com/) App that delineates water bodies around the globe from 1984 until present and provides monthly estimates of surface area of water bodies as well as shapefiles to the user.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+##### Table of Contents
+
+- [Project Goals](#project-goals)
+- [Installation](#installation)
+  * [Dependencies](#dependencies)
+  * [Quick Install](#quick-install)
+    + [Linux](#linux)
+    + [Mac](#mac)
+    + [Windows](#windows)
+  * [Developer Install](#developer-install)
+    + [Docker](#docker)
+    + [Tomcat War](#tomcat-war)
+    + [Cloud VM Template](#cloud-vm-template)
+  * [Build from source](#build-from-source)
+- [Demo](#demo)
+- [Usage](#usage)
+  * [Add A Server](#add-a-server)
+  * [Create A Process](#create-a-process)
+  * [Create A Workflow](#create-a-workflow)
+  * [Run Workflow](#run-workflow)
+  * [Browse Provenance](#browse-provenance)
+  * [Retrieve and Display Results](#retrieve-and-display-results)
+  * [I/O workflows](#i-o-workflows)
+- [Documentation](#documentation)
+- [Dependencies](#dependencies)
+- [License](#license)
+- [Author](#author)
+
 
 ## The Need for Automation of Inland Water Body Mapping
 
@@ -12,7 +39,7 @@ Inland water bodies play a significant role in hydrological systems, and are ess
 
 A demonstration is shown in the blow figure, where the image to the left is the true color composite of three red, green and blue bands from Landsat 8 and the image to the right is the extracted water body that is comprised of water (cyan areas) and non-water (black areas) features. 
 
-![Example](assets/Images/Untitled-1.tif)
+![Example](assets/Images/Untitled-1.gif)
 
 ```markdown
 Syntax highlighted code block
