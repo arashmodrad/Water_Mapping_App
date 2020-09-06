@@ -65,6 +65,7 @@ The App is desigend in way that users can have the following options:
 
 ## How To?
 
+
 ### Tutorial
 
 YouTube tutorial video:
@@ -75,7 +76,7 @@ Here is a YouTube link to the vidoe [YouTube](https://youtu.be/7RovfG7IeM8).
 
 ### GEE Code Edithor
 
-Google Earth Engine Link to Share the Project: 
+To access the project first a GEE acount must be created [SignUp GEE](https://earthengine.google.com/signup/), then one can use th Google Earth Engine Link below to Share the Project: 
 
 Here is a GEE link to the project [GEE](https://code.earthengine.google.com/?accept_repo=users/Water_Delineation/water).
 
