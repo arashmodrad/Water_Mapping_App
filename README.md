@@ -12,6 +12,9 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
   * [GEE Code Edithor](#gee-code-edithor)
   * [Cloning](#Cloning)
 - [Documentation](#documentation)
+  * [Cloud Filtering](#cloud-filtering)
+  * [Augmented Normalized Difference Water Index](#augmented-normalized-difference-water-index)
+  * [References](#references)
 - [Acknowledgments](#acknowledgments)
 - [Authors](#authors)
 - [License](#license)
@@ -83,6 +86,20 @@ Here is a GEE link to the project [GEE](https://code.earthengine.google.com/?acc
 ```shell
 git clone https://earthengine.googlesource.com/users/Water_Delineation/water
 ```
+## Documentation
+
+### Cloud Filtering 
+
+To deal with cloudy scenes a novel framework was developed that filters only those images that cloud is on top of the water body. The CFMASK algorithm in Landsat imagery can result in inappropriate removal of clouds in some scenes due to relatively high commission errors produced by this algorithm. My proposed method uses historical changes of difference of two water indices (in which one classifies clouds as water and the other does not) to filter out cloudy scenes. This method increases the number of useful imageries compared to cloud percentage-based filtering algorithms and thus provides more observations over time.
+
+### Augmented Normalized Difference Water Index  
+
+A novel spectral index namely Augmented Normalized Difference Water Index (ANDWI) is proposed by analyzing reflectance characteristics of water and non-water surface features in Landsat 4, 5, 7, and 8 surface reflectance imagery. ANDWI is defined as the normalized difference of visible and near inferred bands. Results showed that ANDWI is more robust compared to the other spectral water indices but when it is used with zero thresholding it can generate commission errors due to presence of shadows, asphalts, and dark and bright rooftops. However, Otsu thresholding appropriately adjusts the threshold automatically and removes these commission errors thus further increases the overall accuracy of ANDWI.
+
+### References  
+
+...
+
 # Acknowledgments
 
 ![Example4](assests/Images/CUAHSI-Logo-with-URL---Transparent_(RESIZED).gif)
