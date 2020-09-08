@@ -78,7 +78,7 @@ Here is a YouTube link to the vidoe [YouTube](https://youtu.be/7RovfG7IeM8).
 
 To access the project first a GEE acount must be created [SignUp GEE](https://earthengine.google.com/signup/), then one can use th Google Earth Engine Link below to Share the Project: 
 
-Here is a GEE link to the project [GEE](https://code.earthengine.google.com/?accept_repo=users/Water_Delineation/water).
+Here is a GEE link to the project [Water Mapping App](https://code.earthengine.google.com/?accept_repo=users/Water_Delineation/water).
 
 ![Example3](assests/Images/APP.gif)
 
