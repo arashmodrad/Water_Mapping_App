@@ -1,6 +1,6 @@
 # Water Mapping App
 
-A [Google Earth Engine](https://code.earthengine.google.com/) App that delineates water bodies around the globe from 1984 until present and provides monthly estimates of surface area of water bodies as well as shapefiles to the user.
+A [Google Earth Engine](https://code.earthengine.google.com/) App that delineates water bodies around the globe from 1984 until present and provides 16 day estimates of surface area of water bodies as well as shapefiles to the user.
 
 ##### Table of Contents
 
@@ -33,7 +33,7 @@ A demonstration is shown in the figure below, where the image to the left is the
 
 The App is desigend in way that users can have the following options:
 
-1. #### Users can select feom range of Spectral Water Indices including
+1. #### Users can select from range of Spectral Water Indices including
 
 - ANDWI
 
@@ -47,7 +47,7 @@ The App is desigend in way that users can have the following options:
 
 - WI
 
-2. #### Select their study area using a polygon drawing feature
+2. #### Select a study area using a polygon drawing feature
 
 3. #### Chose from the two options of
 
