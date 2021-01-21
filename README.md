@@ -23,6 +23,14 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 
 Inland water bodies play a significant role in hydrological systems, and are essential resources for many human needs such as irrigating croplands and survival of different ecosystems. Both climate change and human interventions are causing large changes in the water bodies on a global scale and such changes will affect agriculture, industry, ecology, and population. The need to map surface water bodies becomes more revealing in water resources management of basins in remote locations with no gauging instruments. Recent advances in satellite‐based optical remote sensors have provided a routine approach for monitoring land surface water bodies in real-time. 
 
+We propose a novel spectral index namely Augmented Normalized Difference Water Index (ANDWI) by analyzing reflectance characteristics of water and non-water surface features in Landsat 4, 5, 7, and 8 surface reflectance imagery. ANDWI is defined as the normalized difference of visible and near inferred bands. To evaluate the performance of ANDWI classification, 8 study areas were selected from different parts of the globe that have unique spectral features that result in misclassification errors in the already proposed water indices in literature. These land surface features include presence of shadows induced by the mountains or buildings that are known to produce commission errors; presence of different built-up material such dark and bright rooftops and asphalt resulting in commission errors; presence of hot water bodies and geothermal lakes that induce omission errors; presence of muddy waters that produce omission errors; passing of dust storms over the water body that causes omission errors; presence of frozen lakes that produce omission errors; and presence of dark vegetation that induces commission errors. 
+
+![Example](assests/Images/ANDWI_City.jpg)
+
+![Example](assests/Images/ANDWI_Studies.jpg)
+
+Two methods of conventional zero and Otsu thresholding was used to determine the threshold separating water and non-water features. Higher resolution imagery from WorldView 2 and 3, Sentinel 2, and Landsat 7 and 8 panchromatic sharpened imagery were used as the ground truth. To compute the ANDWI accuracy, for each of the scenario discussed above a balanced dataset was created and to compute total accuracy and compensate for skewed class proportions from each scenario a down sampling technique was used. Different accuracy metrics including percentages of commission and omission errors, precision, recall, accuracy, F1 score, and Cohen's Kappa coefficient were used to assess the performance of the proposed model as well as other well-known indices in literature such as NDWI, MNDWI, AWEIsh, AWEInsh, and WI.
+
 ### Example
 
 A demonstration is shown in the figure below, where the image to the left is the Pyramid Lake (located in Nevada, United States) true color composite of three red, green and blue bands from Landsat 8 and the image to the right is the extracted water body that is comprised of water (cyan areas) and non-water (black areas) features.
@@ -90,6 +98,8 @@ Here is a GEE link to the project [Water Mapping App](https://code.earthengine.g
 ```shell
 git clone https://earthengine.googlesource.com/users/Water_Delineation/water
 ```
+During the cloning process the user is asked to enter his/her own GEE user account and password. To luanch the App simply go to **RUN** script and press the run buttons above the code editor for running the script. Just a note, the process of clonning may take up to 4 hours to complete!
+
 ## Documentation
 
 ### Cloud Filtering 
