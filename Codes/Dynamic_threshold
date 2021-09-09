@@ -1,0 +1,253 @@
+exports.doc = "##################### >>>>>>>>>>>>>>  Arguements <<<<<<<<<<<<< ###################### " +
+    "\n (Chosen_Index, Chosen_Geometry, Chosen_Geometry_M, Chosen_Geometry_H,    " + 
+    "\n adv, newcol3, CleanCollection, range3, counter4, counter3)  " +
+    "\n" +
+    "\n >> Chosen_Index:" +
+    "\n * 'NDWI' " +
+    "\n * 'mNDWI' " +
+    "\n * 'aNDWI' " +
+    "\n * 'AWEIsh' " +
+    "\n * 'AWEInsh' " +
+    "\n * 'WI' " +
+    "\n" +
+    "\n >> Chosen_Geometry:" +
+    "\n * Sample study area --> geometry " +
+    "\n" +
+    "\n >> Chosen_Geometry_M:" +
+    "\n * A geometry sample for checking Missing Values such scan line errors  Sample_M --> Valid " +
+    "\n" +
+    "\n >> Chosen_Geometry_H:" +
+    "\n * A geometry sample for creating histogram in Otsu method Sample_H --> Otsu  " +
+    "\n" +
+    "\n >> adv: " +
+    "\n * A number suggesting advance rate in time (in month) given the starting date. For 1 month --> 1 " +
+    "\n" +
+    "\n * >> newcol3: " +
+    "\n * Collection of images --> newcol3 " +
+    "\n" +
+    "\n >> CleanCollection: " +
+    "\n * Collection of images with no clouds concealing the water body --> CleanCollection  " +
+    "\n" +
+    "\n >> range3:" +
+    "\n * 'Range of dates for selected study area' --> range3 " +
+    "\n" +
+    "\n >> counter4:" +
+    "\n * 'Count of original images' --> counter4 " +
+    "\n" +
+    "\n >> counter3:" +
+    "\n * 'Count of clean images' --> counter3 " +
+    "\n" +
+    "\n   ########################################################################################";
+    
+// Packages >>>
+var Clipper = require('users/Water_Delineation/water:Functions').Clipper;
+
+exports.init = function(Chosen_Index, Chosen_Geometry, Chosen_Geometry_M, Chosen_Geometry_H, newcol3, CleanCollection, range3, counter4, counter3) {
+
+  var Otsucol = exports.Otsu(range3, newcol3, CleanCollection, Chosen_Geometry, Chosen_Geometry_H, counter3, Chosen_Index);
+
+  var areaCollection = exports.Otsu_WaterBody(Otsucol, Chosen_Index, Chosen_Geometry, counter4);
+
+return {
+    Otsucol: Otsucol,
+    areaCollection: areaCollection,
+    Otsu: exports.Otsu,
+    Otsu_WaterBody: exports.Otsu_WaterBody
+  };
+};
+
+// scaled to reflectance
+exports.Otsu = function(range3, newcol3, CleanCollection, Chosen_Geometry, Chosen_Geometry_H, counter3, chosenIndex) 
+{
+  var thresholdOtsu = function(count, trlist)
+  {
+      
+      trlist = ee.List(trlist);
+      
+      var range4 = ee.List(range3);
+      
+      var date = ee.Date(range4.get(ee.Number(count)));
+      
+      // select the imagecollection for output
+      var TresholdImage = newcol3.filterDate(date, date.advance(1,'day'));
+      
+      // convert to Image
+      var TreshImage = ee.Image(TresholdImage.mean());
+      
+      // select the imagecollection for processing
+      var TresholdImageAll = newcol3.filterDate(date, date.advance(1,'day'));
+
+      // function to retrive lost metadata
+      function metaData (image, imageWithMeta)
+      {
+        //get metadata 
+        var Biva = imageWithMeta.aggregate_first('BV');
+        
+        var Clou = imageWithMeta.aggregate_first('cloud');
+        
+        var sysInd = imageWithMeta.aggregate_first('system:index');
+        
+        var sysTim = imageWithMeta.aggregate_first('system:time_start');
+        
+        //assign it
+        return ee.Feature(image).set('BV', Biva).set('cloud', Clou).set('system:index', sysInd).set('system:time_start', sysTim);
+      }
+      
+      // obtain metadata
+      var revivedImage0 = metaData(TreshImage, TresholdImage);
+      
+      // crop the image to represent study area
+      var revivedImage = Clipper(ee.Image(revivedImage0), Chosen_Geometry);
+      
+      // Compute the histogram of the selected band.  The mean and variance are only FYI.
+      var ImageIndex_NDWI = ee.Image(TresholdImageAll.select(['NDWI']).mean());
+      var ImageIndex_mNDWI = ee.Image(TresholdImageAll.select(['mNDWI']).mean());
+      var ImageIndex_aNDWI = ee.Image(TresholdImageAll.select(['aNDWI']).mean());
+      var ImageIndex_AWEIsh = ee.Image(TresholdImageAll.select(['AWEIsh']).mean());
+      var ImageIndex_AWEInsh = ee.Image(TresholdImageAll.select(['AWEInsh']).mean());
+      var ImageIndex_WI = ee.Image(TresholdImageAll.select(['WI']).mean());
+      var ImageIndex_chosenIndex = ee.Image(TresholdImageAll.select([chosenIndex]).mean()).select(chosenIndex).rename('chosenIndex');
+      
+      //_____________________ watch out for the histogram minBucketWidth ___________________________//
+      var histo = function(ImageIndex){
+         return ImageIndex.reduceRegion({
+                reducer: ee.Reducer.histogram(5000, 0.001)
+                  .combine('mean', null, true)
+                  .combine('variance', null, true), 
+                geometry: Chosen_Geometry_H, 
+                scale: 30,
+                bestEffort: true
+                });
+      };
+      
+      var histogram_NDWI = histo(ImageIndex_NDWI);
+      var histogram_mNDWI = histo(ImageIndex_mNDWI);
+      var histogram_aNDWI = histo(ImageIndex_aNDWI);
+      var histogram_AWEIsh = histo(ImageIndex_AWEIsh);
+      var histogram_AWEInsh = histo(ImageIndex_AWEInsh);
+      var histogram_WI = histo(ImageIndex_WI);
+      var histogram_chosenIndex = histo(ImageIndex_chosenIndex);
+      
+      // Maximizes interclass variance in ImageIndex and provide the optimum water index (in the region).
+      var otsu = function(histogram) {
+        
+        var counts = ee.Array(ee.Dictionary(histogram).get('histogram'));
+        
+        var means = ee.Array(ee.Dictionary(histogram).get('bucketMeans'));
+        
+        var size = means.length().get([0]);
+        
+        var total = counts.reduce(ee.Reducer.sum(), [0]).get([0]);
+        
+        var sum = means.multiply(counts).reduce(ee.Reducer.sum(), [0]).get([0]);
+        
+        var mean = sum.divide(total);
+      
+        var indices = ee.List.sequence(1, size);
+        
+        // Compute between sum of squares, where each mean partitions the data.
+        var bss = indices.map(function(i) {
+          
+          var aCounts = counts.slice(0, 0, i);
+          
+          var aCount = aCounts.reduce(ee.Reducer.sum(), [0]).get([0]);
+          
+          var aMeans = means.slice(0, 0, i);
+          
+          var aMean = aMeans.multiply(aCounts)
+              .reduce(ee.Reducer.sum(), [0]).get([0])
+              .divide(aCount);
+              
+          var bCount = total.subtract(aCount);
+          
+          var bMean = sum.subtract(aCount.multiply(aMean)).divide(bCount);
+          
+          return aCount.multiply(aMean.subtract(mean).pow(2)).add(
+                 bCount.multiply(bMean.subtract(mean).pow(2)));
+        });
+        
+        // Return the mean value corresponding to the maximum T.
+        return means.sort(bss).get([-1]);
+      };
+  
+      var threshold_NDWI = otsu(histogram_NDWI.get('NDWI' + '_histogram'));
+      var threshold_mNDWI = otsu(histogram_mNDWI.get('mNDWI' + '_histogram'));
+      var threshold_aNDWI = otsu(histogram_aNDWI.get('aNDWI' + '_histogram'));
+      var threshold_AWEIsh = otsu(histogram_AWEIsh.get('AWEIsh' + '_histogram'));
+      var threshold_AWEInsh = otsu(histogram_AWEInsh.get('AWEInsh' + '_histogram'));
+      var threshold_WI = otsu(histogram_WI.get('WI' + '_histogram'));
+      var threshold_chosenIndex = otsu(histogram_chosenIndex.get('chosenIndex' + '_histogram'));
+      
+      // assign threshold
+      var TresholdImageFinal = ee.Feature(revivedImage).set('threshold_NDWI', ee.Number(threshold_NDWI));
+      TresholdImageFinal = ee.Feature(TresholdImageFinal).set('threshold_mNDWI', ee.Number(threshold_mNDWI));
+      TresholdImageFinal = ee.Feature(TresholdImageFinal).set('threshold_aNDWI', ee.Number(threshold_aNDWI));
+      TresholdImageFinal = ee.Feature(TresholdImageFinal).set('threshold_AWEIsh', ee.Number(threshold_AWEIsh));
+      TresholdImageFinal = ee.Feature(TresholdImageFinal).set('threshold_AWEInsh', ee.Number(threshold_AWEInsh));
+      TresholdImageFinal = ee.Feature(TresholdImageFinal).set('threshold_WI', ee.Number(threshold_WI));
+      TresholdImageFinal = ee.Feature(TresholdImageFinal).set('threshold', ee.Number(threshold_chosenIndex));
+      
+      return trlist.add(TresholdImageFinal);
+  };
+  
+  //__________________________ check visually to see if there are enough points _____________________________//
+  //print(ui.Chart.array.values(ee.Array(bss), 0, means));    
+  
+  var Otsucol = ee.ImageCollection(ee.List(counter3.iterate(thresholdOtsu, ee.List([]))));
+  
+  return Otsucol;
+};
+
+// Convert the raw data to radiance.
+exports.Otsu_WaterBody = function(Otsucol, chosenIndex, Chosen_Geometry, counter4)
+{
+  function waterBodies_Otsu(count2, areaList)
+  {
+    areaList = ee.List(areaList);
+  
+    // convert to string
+    //ee.Algorithms.If(ee.Number(count2).gt(10), area51, areaList)
+    var counter = ee.String(ee.Number(count2).int());
+    
+    
+    // select the image
+    var WATERimage = ee.Image(Otsucol.filterMetadata('system:index', 'equals', ee.String(ee.Number(counter)))
+                        .select(chosenIndex)
+                        .mean()); // normal case
+            
+    // find threshold
+    var TRimage = ee.ImageCollection(Otsucol.filterMetadata('system:index', 'equals', ee.String(ee.Number(counter))));
+    var TRsh = TRimage.aggregate_first('threshold');
+    var TrshNum = ee.Number.parse(TRsh);
+  
+    
+    // find water
+    var lake_mask= WATERimage.gt(TrshNum); // normal case
+    
+    // remove none water
+    var lake_mask1 = ee.Image(1).mask(lake_mask).toInt();
+    
+    // calculate area
+    var areaImage = lake_mask1.multiply(ee.Image.pixelArea().divide(10000));
+    var areas = areaImage.reduceRegion({
+      reducer:ee.Reducer.sum(),
+      geometry: Chosen_Geometry,
+      scale: 30,
+      maxPixels:1e13
+    });
+    
+    // assign time 
+    var area_value = areas.get('constant');
+  
+    // Add the area to a list only if the collection has images
+    return areaList.add(area_value);
+  }
+  
+  var areaCollection = ee.List(counter4.iterate(waterBodies_Otsu, ee.List([])));
+
+  return areaCollection;
+};
+
+
+
+
