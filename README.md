@@ -47,7 +47,7 @@ The App is desigend in way that users can have the following options:
 
 1. #### Users can select from range of Spectral Water Indices including
 
-- ANDWI  =   ${({Blue + Green + Red})-({Nir + Swir1 + Swir2})} / {({Blue + Green + Red})+({Nir + Swir1 + Swir2})}$
+- ANDWI  =   $\dfrac{({Blue + Green + Red})-({Nir + Swir1 + Swir2})}{({Blue + Green + Red})+({Nir + Swir1 + Swir2})}$
 
 - MNDWI
 
