@@ -49,15 +49,15 @@ The App is desigend in way that users can have the following options:
 
 - ANDWI  =   $\dfrac{({Blue + Green + Red})-({Nir + Swir1 + Swir2})}{({Blue + Green + Red})+({Nir + Swir1 + Swir2})}$
 
-- MNDWI
+- MNDWI = $\dfrac{Green - Swir1}{Green + Swir1}$
 
-- NDWI
+- NDWI = $\dfrac{Green - Nir}{Green + Nir}$
 
-- AWEIsh
+- AWEIsh = Blue + 2.5\times Green - 1.5\times ({Nir + Swir1}) - 0.25\times Swir2 
 
-- AWEInsh
+- AWEInsh = 4\times ({Green - Swir1}) - ({0.25\times Nir + 2.75\times Swir22})
 
-- WI
+- WI = 1.7204 + 1.71\times Green + 3\times Red - 70\times Nir - 45\times Swir1 - 71\times Swir2 
 
 2. #### Select a study area using a polygon drawing feature
 
