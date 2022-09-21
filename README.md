@@ -9,6 +9,7 @@ A [Google Earth Engine](https://code.earthengine.google.com/) App that delineate
 - [App Options](#app-options)
 - [How To?](#how-to)
   * [Tutorial](#tutorial)
+  * [General Tips](#tips)
   * [GEE Code Edithor](#gee-code-edithor)
   * [Cloning](#Cloning)
 - [Documentation](#documentation)
@@ -46,7 +47,7 @@ The App is desigend in way that users can have the following options:
 
 1. #### Users can select from range of Spectral Water Indices including
 
-- ANDWI
+- ANDWI  =  ((Blue + Green + Red)-(Nir + Swir1 + Swir2)) / ((Blue + Green + Red)+(Nir + Swir1 + Swir2))
 
 - MNDWI
 
@@ -75,6 +76,17 @@ The App is desigend in way that users can have the following options:
 5. #### Select an ID associated with the date of intrest to export a shapefile of water body
 
 ## How To?
+
+## App Tips
+
+- From a global study that I did, the highest accuracy was achieved using **ANDWI** or **MNDWI** with **dynamic thresholding** using Otsu method see this [Paper](https://doi.org/10.1016/j.envsoft.2021.105030) for more details and discussions. 
+- Please make sure that both "Validation_Polygon" and "Otsu_Polygon" layers are inside the "StudyArea" layer.
+- The smaller the "Validation_Polygon" the more computational efficiency it would be, I prefer selecting a small area in the middle of "StudyArea" layer.
+![Example5](assests/Images/debug1.gif)
+- The best results for Otsu thresholding / dynamic thresholding (selecting the "Otsu_Polygon") is achieved when half of the pixels are in land area and the other half are in the water   
+![Example6](assests/Images/debug2.gif)
+- Make sure you put a number in "Enter water feature ID" the ID corresponds to the output .csv file index numbers meaning that once you get the .csv file you can run the model n times with different IDs to get shapefiles for different dates.
+- You can keep the App open and press "Run WMA" as many times with different settings.
 
 
 ### Tutorial
